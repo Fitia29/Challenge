@@ -1,4 +1,5 @@
 import CTAButton from "@/components/cta-button";
+import CTASection from "@/features/home/cta/cta-section";
 import TutorialSection from "@/features/home/tutorial/tutorial-section";
 import Image from "next/image";
 
@@ -69,6 +70,8 @@ export default function Home() {
       </main>
 
       <TutorialSection/>
+
+      <CTASection />
     </div>
   );
 }
