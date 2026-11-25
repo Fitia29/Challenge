@@ -19,7 +19,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${manrope.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col px-12">
+      <body className="min-h-full flex flex-col">
         <AppQueryClientProvider>
           {children}
         </AppQueryClientProvider>
