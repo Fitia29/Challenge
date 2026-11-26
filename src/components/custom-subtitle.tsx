@@ -14,7 +14,7 @@ export default function CustomSubtitle({
   return (
     <h2
       className={cn(
-        " uppercase leading-[60px] text-secondary text-title",
+        " uppercase leading-[60px] text-secondary text-title font-bold",
         className,
       )}
     >
