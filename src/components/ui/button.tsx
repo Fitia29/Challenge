@@ -17,7 +17,10 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
-        custom: "border border-primary text-primary-foreground bg-primary rounded-full py-[17px] px-[30px]"
+        // custom: "border border-primary text-primary-foreground bg-primary rounded-full py-[17px] px-[30px]"
+        custom: "h-auto! text-base! font-semibold border border-primary text-primary-foreground bg-primary rounded-full py-[17px] px-[30px]",
+        customOutline:
+          "h-auto! text-base! font-semibold border border-white text-white bg-transparent rounded-full py-[17px] px-[30px] hover:bg-white/10"
       },
       size: {
         default:
