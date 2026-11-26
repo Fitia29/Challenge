@@ -21,7 +21,7 @@ export default function UsersBadge() {
         {data.users.slice(0, MAX_AVATARS).map((user) => (
           <span
             key={user.id}
-            className="-ml-2 flex size-8 items-center justify-center overflow-hidden rounded-full border-2 border-[#0A123D] bg-slate-300 text-[#0A123D] first:ml-0"
+            className="-ml-2 flex size-8 items-center justify-center overflow-hidden rounded-full border-2 border-navy bg-slate-300 text-navy first:ml-0"
           >
             {user.avatarUrl ? (
               <Image

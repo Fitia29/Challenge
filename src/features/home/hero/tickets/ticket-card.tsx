@@ -1,42 +1,13 @@
 import Image from "next/image";
 import type { TicketItem } from "./ticket.types";
 
+// Taille d'un ticket en pixels (le carrousel le réduit sur petits écrans)
 export const TICKET_W = 330;
 export const TICKET_H = 467;
+// Identifiant utilisé par le <clipPath> défini dans tickets-carousel.tsx
 export const TICKET_CLIP_ID = "ticket-clip";
 
-const SCALLOP_COUNT = 7;
-const DESIGN_W = 440;
-const DESIGN_H = 623;
-const HALF = 1 / (SCALLOP_COUNT * 2); 
-const C1 = 12.35 / DESIGN_W; 
-const C2 = 24.08 / DESIGN_W; 
-const DEPTH = 21.75 / DESIGN_H; 
-
-export const TICKET_PATH = (() => {
-  const f = (n: number) => +n.toFixed(5);
-  const steps = SCALLOP_COUNT * 2;
-  let d = `M0,${f(DEPTH)}`;
-
-  for (let i = 0; i < steps; i++) {
-    const x0 = i * HALF;
-    const x1 = x0 + HALF;
-    if (i % 2 === 0) d += ` C${f(x0 + C2)},${f(DEPTH)} ${f(x1 - C1)},0 ${f(x1)},0`;
-    else d += ` C${f(x0 + C1)},0 ${f(x1 - C2)},${f(DEPTH)} ${f(x1)},${f(DEPTH)}`;
-  }
-
-  d += ` L1,${f(1 - DEPTH)}`;
-
-  for (let i = 0; i < steps; i++) {
-    const x0 = 1 - i * HALF;
-    const x1 = x0 - HALF;
-    if (i % 2 === 0) d += ` C${f(x0 - C2)},${f(1 - DEPTH)} ${f(x1 + C1)},1 ${f(x1)},1`;
-    else d += ` C${f(x0 - C1)},1 ${f(x1 + C2)},${f(1 - DEPTH)} ${f(x1)},${f(1 - DEPTH)}`;
-  }
-
-  return d + " Z";
-})();
-
+// 20000 -> "20K", 1500000 -> "1,5M"
 export function formatPrice(value: number) {
   const fmt = (n: number, unit: string) => `${Number(n.toFixed(1))}${unit}`.replace(".", ",");
   if (value >= 1_000_000) return fmt(value / 1_000_000, "M");
@@ -44,6 +15,7 @@ export function formatPrice(value: number) {
   return String(value);
 }
 
+// Dessin du code-barres : [position x, largeur] de chaque barre
 const BARCODE_W = 145;
 const BARCODE_H = 36;
 const BARCODE: ReadonlyArray<readonly [x: number, w: number]> = [
@@ -52,12 +24,13 @@ const BARCODE: ReadonlyArray<readonly [x: number, w: number]> = [
   [106.5, 4.5], [115.5, 4.5], [125.25, 3.75], [134.25, 3.75], [143.25, 1.5],
 ];
 
+// Petits mots affichés au milieu du ticket
 const BADGES = ["SPECTACLE", "LIVE", "AMBIANCE"];
 
 export function TicketShell({ children, className = "" }: { children?: React.ReactNode; className?: string }) {
   return (
     <div
-      className={`relative overflow-hidden bg-[#0A123D] ${className}`}
+      className={`relative overflow-hidden bg-navy ${className}`}
       style={{ width: TICKET_W, height: TICKET_H, clipPath: `url(#${TICKET_CLIP_ID})` }}
     >
       {children}
@@ -72,7 +45,7 @@ export default function TicketCard({ ticket }: { ticket: TicketItem }) {
         {ticket.imageUrl ? (
           <Image src={ticket.imageUrl} alt="" fill unoptimized sizes="330px" className="object-cover" />
         ) : (
-          <div className="size-full bg-gradient-to-b from-[#1a2a6c] to-[#0A123D]" />
+          <div className="size-full bg-gradient-to-b from-[#1a2a6c] to-navy" />
         )}
         {ticket.tint && (
           <div className="absolute inset-0 opacity-60" style={{ backgroundColor: ticket.tint, mixBlendMode: "color" }} />

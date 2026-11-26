@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
 import AppQueryClientProvider from "@/providers/Providers";
-import NavBarDesktop from "@/components/navbar/navbar-desktop";
-import { Popup } from "@/components/popup";
+import Navbar from "@/components/layout/navbar";
+import TopBanner from "@/components/layout/top-banner";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -20,8 +20,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="fr" className={`${manrope.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <AppQueryClientProvider>
-          <Popup />
-          <NavBarDesktop />
+          <TopBanner />
+          <Navbar />
           {children}
         </AppQueryClientProvider>
       </body>

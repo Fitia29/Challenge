@@ -3,16 +3,18 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 
-export function Popup() {
+const BANNER_TEXT =
+  "Concentrez-vous sur votre événement, nous simplifions votre billetterie";
+
+export default function TopBanner() {
+  // true = le bandeau est affiché, false = l'utilisateur l'a fermé
   const [visible, setVisible] = useState(true);
 
   if (!visible) return null;
 
   return (
-    <div className="relative z-40 flex items-center justify-between gap-4 bg-primary px-12 py-3 text-primary-foreground">
-      <p className="min-w-0 truncate text-paragraph font-bold">
-        Concentrez-vous sur votre événement, nous simplifions votre billetterie
-      </p>
+    <div className="relative z-40 flex items-center justify-between gap-4 bg-primary px-4 py-3 text-primary-foreground md:px-12">
+      <p className="text-sm font-bold md:text-base">{BANNER_TEXT}</p>
 
       <button
         type="button"

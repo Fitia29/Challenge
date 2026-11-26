@@ -1,9 +1,13 @@
+import FaqSection from "@/features/home/faq/faq-section";
 import HeroSection from "@/features/home/hero/hero-section";
+import TemoignageSection from "@/features/temoignage/TemoignageSection";
 
 export default function Home() {
   return (
-    <div>
+    <main className="flex-1">
       <HeroSection />
-    </div>
+      <FaqSection />
+      <TemoignageSection />
+    </main>
   );
 }

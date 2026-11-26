@@ -6,9 +6,9 @@ const USE_MOCK = true;
 const MOCK_USERS_BADGE: UsersBadgeData = {
   label: "1,2k utilisateurs de tikety",
   users: [
-    { id: "1", name: "Utilisateur 1", avatarUrl: "/images/hero/users2 (1).svg" },
-    { id: "2", name: "Utilisateur 2", avatarUrl: "/images/hero/users2 (2).svg" },
-    { id: "3", name: "Utilisateur 3", avatarUrl: "/images/hero/users2 (3).svg" },
+    { id: "1", name: "Utilisateur 1", avatarUrl: "/images/hero/avatar-1.svg" },
+    { id: "2", name: "Utilisateur 2", avatarUrl: "/images/hero/avatar-2.svg" },
+    { id: "3", name: "Utilisateur 3", avatarUrl: "/images/hero/avatar-3.svg" },
   ],
 };
 
