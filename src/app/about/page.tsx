@@ -1,4 +1,4 @@
-import HistorySection from "@/features/about/history-section";
+import HistorySection from "@/features/about/history/history-section";
 
 export default function AboutPage() {
   return (
