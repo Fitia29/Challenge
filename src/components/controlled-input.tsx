@@ -57,7 +57,7 @@ export default function ControlledInput<TFieldValues extends FieldValues>({
           )}
 
           {fieldState.error && (
-            <FieldError className="text-destructive">
+            <FieldError className="text-destructive h-2">
               {fieldState.error.message}
             </FieldError>
           )}

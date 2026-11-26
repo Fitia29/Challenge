@@ -38,7 +38,7 @@ const SOCIAL_MEDIA = [
 
 export default function ContactFormSection() {
   return (
-    <section className="flex w-full justify-center h-[527px] rounded-[24px]">
+    <section className="flex w-full justify-center rounded-[24px]">
       <div className="w-[40%]">
         <div className="bg-[#DDDFE680]/50 p-[20px] opacity-[50%] rounded-tl-[24px] h-[50%] flex flex-col gap-[16px] border-[0.2px]">
           {CONTACT_DATA.map((contact, index) => (
