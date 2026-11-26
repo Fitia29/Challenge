@@ -9,7 +9,7 @@ export default function HistorySection() {
           src={"/about-movie-tickets.jpg"}
           alt="movie tickets image"
           fill
-          className="rounded-[20px] object-cover"
+          className="rounded-[20px] object-cover hover:scale-101 transition"
         />
       </div>
 

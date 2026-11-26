@@ -6,7 +6,7 @@ export default function HowItWorksSection() {
     <div className="flex flex-col-reverse xl:flex-row gap-[32px] px-4 sm:px-10  items-center justify-center py-[83px]">
       <DescriptionSection />
 
-      <div className="relative w-full xl:w-[556px] 2xl:w-[856px] h-[490px] sm:h-[590px] xl:h-[790px] overflow-hidden">
+      <div className="relative w-full xl:w-[556px] 2xl:w-[856px] h-[490px] sm:h-[590px] xl:h-[790px] overflow-hidden rounded-[20px]">
         <Image
           src={"/how-background.png"}
           alt="how background image"
