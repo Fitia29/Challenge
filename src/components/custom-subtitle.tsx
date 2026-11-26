@@ -4,12 +4,14 @@ type CustomSubtitleProps = {
   title: string;
   span: string;
   className?: string;
+  lastText?: string;
 };
 
 export default function CustomSubtitle({
   title,
   span,
   className,
+  lastText,
 }: CustomSubtitleProps) {
   return (
     <h2
@@ -18,7 +20,7 @@ export default function CustomSubtitle({
         className,
       )}
     >
-      {title} <span className="text-primary">{span}</span>
+      {title} <span className="text-primary">{span}</span> {lastText}
     </h2>
   );
 }
