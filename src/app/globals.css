@@ -5,6 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Couleur bleu nuit de la marque : utilisable avec bg-navy, text-navy, border-navy... */
+  --color-navy: #0A123D;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-manrope);
@@ -61,6 +63,7 @@
   --primary: oklch(58.9% 0.203 257.9);
   --primary-foreground: oklch(100% 0 0);
   --secondary: oklch(20.8% 0.083 269.6);
+   --footer: oklch(90.4% 0.01 273.3);
   --secondary-foreground: oklch(58.8% 0.043 269.1);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
@@ -129,5 +132,92 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+/* ---------- Animations du fond étoilé (voir starry-background.tsx) ---------- */
+
+/* Une étoile qui scintille */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.9; }
+}
+
+/* Une étincelle dorée qui grandit et tourne */
+@keyframes sparkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.5) rotate(0deg); }
+  50% { opacity: 0.9; transform: scale(1) rotate(45deg); }
+}
+
+/* Une étoile filante : visible au début, puis invisible le reste du temps */
+@keyframes shooting-star {
+  0% { opacity: 0; transform: rotate(30deg) translateX(0); }
+  3% { opacity: 1; }
+  10% { opacity: 0; transform: rotate(30deg) translateX(600px); }
+  100% { opacity: 0; transform: rotate(30deg) translateX(600px); }
+}
+
+/* Respecte le réglage "réduire les animations" du système */
+@media (prefers-reduced-motion: reduce) {
+  .star, .sparkle, .shooting-star { animation: none !important; }
+}
+
+
+/* ---------- Carrousel des événements (voir features/home/event) ---------- */
+@keyframes event-marquee {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.event-carousel {
+  position: relative;
+  overflow: hidden;
+  filter: none;
+  backdrop-filter: none;
+}
+
+.event-carousel img {
+  filter: none;
+  backdrop-filter: none;
+}
+
+.event-carousel-track {
+  display: flex;
+  width: max-content;
+  animation: event-marquee 36s linear infinite;
+}
+
+.event-carousel-group {
+  display: flex;
+  flex: none;
+  width: max-content;
+  gap: 16px;
+  padding-right: 16px;
+}
+
+.event-carousel-slide {
+  flex: none;
+  width: min(320.75px, calc(100vw - 40px));
+}
+
+@media (max-width: 640px) {
+  .event-carousel {
+    width: calc(100vw - 24px);
+  }
+}
+
+.event-carousel:hover .event-carousel-track,
+.event-carousel:focus-within .event-carousel-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .event-carousel-track {
+    animation: none;
   }
 }
