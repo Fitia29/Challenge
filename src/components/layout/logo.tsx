@@ -4,7 +4,6 @@ import Link from "next/link";
 export default function Logo() {
   return (
     <Link href="/" className="flex items-center gap-2 md:gap-4" aria-label="Tikety - Accueil">
-      {/* Le logo est plus petit sur mobile (w-9) et grand à partir de md */}
       <Image
         src="/images/logo.svg"
         alt=""
