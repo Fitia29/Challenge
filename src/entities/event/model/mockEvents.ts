@@ -1,44 +1,48 @@
-import {EventItem} from "@/entities/event/model/types";
+import type { EventItem } from "@/entities/event/model/types";
 
 export const MOCK_EVENTS: EventItem[] = [
     {
         id: "1",
-        badge: "Spectacle",
-        category: "spectacle-concert",
         title: "Festival de la musique",
-        location: "Kianja barea Mahamasina",
-        date: "28 novembre 2026",
-        time: "08:00 - 18:00",
-        imageUrl: "/images/festival.png",
+        description: "Festival de musique à Antananarivo.",
+        categoryName: "Spectacle et concert",
+        coverImage: "/images/festival.png",
+        startDate: "2026-11-28T00:00:00",
+        endDate: "2026-11-28T00:00:00",
+        startTime: "08:00:00",
+        endTime: "18:00:00",
     },
     {
         id: "2",
-        badge: "Culture",
-        category: "cultures",  
         title: "Global Cultural Festival",
-        location: "Kianja barea Mahamasina",
-        date: "28 novembre 2026",
-        time: "08:00 - 18:00",
-        imageUrl: "/images/culture.jpg"
+        description: "Un rendez-vous consacré aux cultures du monde.",
+        categoryName: "Cultures",
+        coverImage: "/images/culture.jpg",
+        startDate: "2026-11-28T00:00:00",
+        endDate: "2026-11-28T00:00:00",
+        startTime: "08:00:00",
+        endTime: "18:00:00",
     },
     {
         id: "3",
-        badge: "Sport",
-        category: "sports-loisirs",
         title: "MotoGP Racing",
-        location: "Kianja barea Mahamasina",
-        date: "28 novembre 2026",
-        time: "08:00 - 18:00",
-        imageUrl: "/images/motogp.jpg"
+        description: "Une journée dédiée aux sports mécaniques.",
+        categoryName: "Sports et loisirs",
+        coverImage: "/images/motogp.jpg",
+        startDate: "2026-11-28T00:00:00",
+        endDate: "2026-11-28T00:00:00",
+        startTime: "08:00:00",
+        endTime: "18:00:00",
     },
     {
         id: "4",
-        badge: "Seminaire",
-        category: "seminaires",
         title: "Conference",
-        location: "Kianja barea Mahamasina",
-        date: "28 novembre 2026",
-        time: "08:00 - 18:00",
-        imageUrl: "/images/conference.jpg"
+        description: "Une conférence autour des nouveaux usages.",
+        categoryName: "Seminaires",
+        coverImage: "/images/conference.jpg",
+        startDate: "2026-11-28T00:00:00",
+        endDate: "2026-11-28T00:00:00",
+        startTime: "08:00:00",
+        endTime: "18:00:00",
     }
 ];

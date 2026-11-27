@@ -5,7 +5,7 @@ const navigation = ["Accueil", "Événements", "À propos", "Actualités", "Gale
 
 export default function Footer() {
   return (
-    <footer className="overflow-hidden bg-secondary text-[#DDDFE6]">
+    <footer className="overflow-hidden bg-secondary text-[#DDDFE6] mt-0">
       <div className="mx-auto max-w-[1440px] px-6 pt-8 sm:px-8 lg:px-9">
         <div className="grid gap-10 pb-8 md:grid-cols-[180px_minmax(0,1fr)_250px] md:gap-8">
           <nav aria-label="Navigation du pied de page" className="text-sm">
