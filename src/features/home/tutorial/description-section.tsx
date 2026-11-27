@@ -4,7 +4,7 @@ import AnimatedParagraph from "@/components/animated-paragraph";
 
 export default function DescriptionSection() {
   return (
-    <article className="flex flex-col gap-[16px] max-xl:items-center ">
+    <article className="flex flex-col gap-[16px] max-xl:items-center">
       <AnimatedTitle>
         Vos billets, en quelques clics. Vos événements,{" "}
         <span className="text-primary">{"sans limites"}</span>
