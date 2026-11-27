@@ -192,6 +192,23 @@
   animation: event-marquee 36s linear infinite;
 }
 
+.event-carousel--static {
+  overflow-x: auto;
+}
+
+.event-carousel--static .event-carousel-track {
+  width: 100%;
+  animation: none;
+  transform: none;
+}
+
+.event-carousel--static .event-carousel-group {
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: none;
+}
+
 .event-carousel-group {
   display: flex;
   flex: none;
@@ -208,6 +225,12 @@
 @media (max-width: 640px) {
   .event-carousel {
     width: calc(100vw - 24px);
+  }
+
+  .event-carousel--static .event-carousel-group {
+    width: max-content;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
   }
 }
 
