@@ -4,7 +4,6 @@ import TutorialSection from "@/features/home/tutorial/tutorial-section";
 import LastEventSection from "@/features/home/event/last-event";
 import FaqSection from "@/features/home/faq/faq-section";
 import CTASection from "@/features/home/cta/cta-section";
-import Footer from "@/features/home/footer/footer";
 
 export default function Home() {
   return (
@@ -15,7 +14,6 @@ export default function Home() {
       <LastEventSection />
       <FaqSection />
       <CTASection />
-      <Footer />
     </main>
   );
 }
