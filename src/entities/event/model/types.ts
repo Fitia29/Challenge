@@ -3,6 +3,8 @@ export interface EventItem {
     title: string;
     description: string;
     categoryName: string;
+    location?: string;
+    price?: number;
     coverImage: string;
     startDate: string;
     endDate: string;
