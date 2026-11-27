@@ -21,7 +21,7 @@ const emptyField: SendMessage = {
 };
 
 export default function ContactForm() {
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     defaultValues: emptyField,
     resolver: zodResolver(sendMessageSchema),
   });
@@ -29,7 +29,7 @@ export default function ContactForm() {
   const { mutate: sendMessage, isPending } = useSendMessage();
 
   const onSubmit: SubmitHandler<SendMessage> = (data) => {
-    sendMessage(data);
+    sendMessage(data, { onSuccess: () => reset() });
   };
 
   return (
@@ -58,7 +58,7 @@ export default function ContactForm() {
         <ControlledInput
           control={control}
           name="phone"
-          placeholder="+261 00 00 000 00"
+          placeholder="+261000000000"
         >
           <Phone color="var(--secondary)" />
         </ControlledInput>
