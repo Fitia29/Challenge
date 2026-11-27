@@ -12,8 +12,6 @@ import UsersBadge from "./users-badge";
 
 export default function HeroSection() {
   return (
-    // pb-[...] = espace réservé en bas pour le carrousel de tickets (il est collé en bas).
-    // Plus l'écran est petit, plus le carrousel est réduit, donc moins d'espace.
     <Hero size="full" className="pb-[300px] sm:pb-[370px] lg:pb-[420px]">
       <HeroContent>
         <UsersBadge />
