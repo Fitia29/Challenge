@@ -38,9 +38,9 @@ const SOCIAL_MEDIA = [
 
 export default function ContactFormSection() {
   return (
-    <section className="flex w-full justify-center rounded-[24px]">
-      <div className="w-[40%]">
-        <div className="bg-[#DDDFE680]/50 p-[20px] opacity-[50%] rounded-tl-[24px] h-[50%] flex flex-col gap-[16px] border-[0.2px]">
+    <section className="flex flex-col lg:flex-row w-full max-lg:gap-4 justify-center rounded-[24px]">
+      <div className="w-full lg:w-[40%] flex flex-col max-lg:gap-4">
+        <div className="bg-[#DDDFE680]/50 p-[20px] opacity-[50%] max-lg:rounded-[24px] lg:rounded-tl-[24px] h-[50%] flex flex-col gap-[16px] border-[0.2px]">
           {CONTACT_DATA.map((contact, index) => (
             <ContactLine
               key={index}
@@ -50,7 +50,7 @@ export default function ContactFormSection() {
           ))}
         </div>
 
-        <div className="bg-[#DDDFE680]/50 h-[50%] p-[20px] rounded-bl-[24px] opacity-[50%] border-[0.2px] flex flex-col gap-[16px]">
+        <div className="bg-[#DDDFE680]/50 h-[50%] p-[20px] max-lg:rounded-[24px] lg:rounded-bl-[24px] opacity-[50%] border-[0.2px] flex flex-col gap-[16px]">
           <p className="text-secondary-foreground text-paragraph leading-[24px]">
             {"Suivez-nous sur"}
           </p>

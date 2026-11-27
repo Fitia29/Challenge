@@ -3,7 +3,7 @@ import ContactFormSection from "./contact-form-section";
 
 export default function ContactSection() {
   return (
-    <div className="flex flex-col gap-[50px] items-center py-8 md:py-[85px] px-[126px]">
+    <div className="flex flex-col gap-[50px] items-center py-8 md:py-[85px] px-4 sm:px-[126px] w-full">
       <div className="flex flex-col gap-2 md:gap-[16px] items-center">
         <CustomSubtitle
           title="Créons quelque chose"

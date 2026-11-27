@@ -33,7 +33,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="flex-1 flex flex-col gap-[24px] border-[0.2px] rounded-r-[24px] p-[20px]">
+    <div className="flex-1 flex flex-col gap-[24px] border-[0.2px] max-lg:rounded-[24px] lg:rounded-r-[24px] p-[20px]">
       <p className="font-[500] text-[20px] leading-[24px] text-secondary">
         {"Envoyez-nous votre message"}
       </p>
@@ -42,7 +42,7 @@ export default function ContactForm() {
         className="flex flex-col gap-[16px]"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-4">
           <ControlledInput
             control={control}
             name="lastName"
@@ -83,7 +83,7 @@ export default function ContactForm() {
             disabled={isPending}
             type="submit"
             className={
-              "h-[56px] bg-secondary text-white px-[16px] py-[12px] rounded-[var(--radius)] w-[20%] hover:bg-secondary cursor-pointer"
+              "h-[56px] bg-secondary text-white px-[16px] py-[12px] rounded-[var(--radius)] w-[180px] sm:w-[40%] 2xl:w-[20%] hover:bg-secondary cursor-pointer"
             }
           >
             {isPending ? <Spinner /> : "Envoyer le message"}
