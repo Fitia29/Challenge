@@ -7,33 +7,36 @@ import TicketCard, { TICKET_CLIP_ID, TICKET_H, TICKET_W, TicketShell } from "./t
 import { TICKET_CLIP_PATH } from "./ticket-shape";
 import { useTickets } from "./use-tickets";
 
-const GAP = 28; 
-const PITCH = TICKET_W + GAP; 
-const ACTIVE_GAP = 52; 
-const VIEW_H = 420; 
-const BASE_TOP = 139; 
-const REVEAL_MARGIN = -22; 
+const GAP = 16; // espace entre 2 tickets
+const PITCH = TICKET_W + GAP; // distance entre les centres de 2 tickets voisins
+const ACTIVE_GAP = 46; // espace supplémentaire autour du ticket principal
+const VIEW_H = 420; // hauteur visible du carrousel
+const BASE_TOP = 123; // position du haut des tickets dans la zone visible
+const REVEAL_MARGIN = -22; // marge sous un ticket « révélé »
 
-const ACTIVE_SCALE = 1.18;
-const ACTIVE_Y = -64;
-const ACTIVE_ROTATE = 3;
+const ACTIVE_SCALE = 1.18; // zoom du ticket principal
+const ACTIVE_Y = -50; // décalage vertical du ticket principal
+const ACTIVE_ROTATE = 3; // inclinaison du ticket principal
 
-const SKELETON_COUNT = 9; 
+const SKELETON_COUNT = 9; // faux tickets affichés pendant le chargement
+const VISIBLE = 5; // nombre de tickets affichés de chaque côté du principal
 
 const ARROW_CLASSES =
   "absolute top-[40%] z-30 flex size-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white/15 text-white backdrop-blur disabled:opacity-40 lg:hidden";
 
+// Position d'un ticket par rapport au ticket actif : 0 = principal, -1 = à gauche, 1 = à droite…
 function positionFromActive(index: number, active: number, total: number) {
   const half = Math.floor(total / 2);
   return ((((index - active + half) % total) + total) % total) - half;
 }
 
+// Décalage vertical pour qu'un ticket « révélé » (survolé) montre toute sa hauteur.
 function revealY(scale: number) {
   return VIEW_H - REVEAL_MARGIN - BASE_TOP - TICKET_H / 2 - (TICKET_H * scale) / 2;
 }
 
 export default function TicketsCarousel() {
-  const { data: tickets, isPending } = useTickets();
+  const { data: tickets, isPending, isError } = useTickets();
   const reduceMotion = useReducedMotion();
 
   const [{ active, prev }, setState] = useState({ active: 2, prev: 2 });
@@ -43,8 +46,29 @@ export default function TicketsCarousel() {
   const total = isPending ? SKELETON_COUNT : items.length;
   const half = Math.floor(total / 2);
 
+  // L'index de départ est 2 : on le ramène dans [0, total[ si l'API renvoie moins d'événements.
+  const clamp = (index: number) => (total > 0 ? Math.min(index, total - 1) : 0);
+  const current = clamp(active);
+  const previous = clamp(prev);
+
   function goTo(index: number) {
-    setState({ active: index, prev: active });
+    setState({ active: index, prev: current });
+  }
+
+  // Erreur API (mocks désactivés) ou aucun événement : on garde la zone et on l'indique.
+  if (!isPending && total === 0) {
+    return (
+      <div
+        className="absolute inset-x-0 bottom-0 z-[1] flex items-center justify-center px-6 text-center"
+        style={{ height: VIEW_H }}
+      >
+        <p role={isError ? "alert" : "status"} className="text-sm text-white/70">
+          {isError
+            ? "Impossible de charger les événements pour le moment."
+            : "Aucun événement à la une pour le moment."}
+        </p>
+      </div>
+    );
   }
 
   return (
@@ -62,11 +86,16 @@ export default function TicketsCarousel() {
         aria-label="Événements à la une"
       >
         {Array.from({ length: total }, (_, i) => {
-          const rel = positionFromActive(i, active, total);
-          const relPrev = positionFromActive(i, prev, total);
-          const wrapped = rel - relPrev !== prev - active; 
+          const rel = positionFromActive(i, current, total);
+
+          // On ne rend que les tickets proches du principal : le nombre total n'est donc pas limité.
+          if (Math.abs(rel) > VISIBLE) return null;
+
+          const relPrev = positionFromActive(i, previous, total);
+          const wrapped = rel - relPrev !== previous - current;
           const isActive = rel === 0;
-          const hidden = Math.abs(rel) === half; 
+          const hidden = Math.abs(rel) === half;
+          // Un ticket (le principal aussi) ne remonte que lorsqu'on le survole.
           const revealed = !isPending && !hidden && hovered === i;
 
           const transition =
@@ -133,7 +162,7 @@ export default function TicketsCarousel() {
         type="button"
         aria-label="Ticket précédent"
         disabled={isPending}
-        onClick={() => goTo((active - 1 + total) % total)}
+        onClick={() => goTo((current - 1 + total) % total)}
         className={`${ARROW_CLASSES} left-2 sm:left-6`}
       >
         <ChevronLeft size={20} />
@@ -142,7 +171,7 @@ export default function TicketsCarousel() {
         type="button"
         aria-label="Ticket suivant"
         disabled={isPending}
-        onClick={() => goTo((active + 1) % total)}
+        onClick={() => goTo((current + 1) % total)}
         className={`${ARROW_CLASSES} right-2 sm:right-6`}
       >
         <ChevronRight size={20} />

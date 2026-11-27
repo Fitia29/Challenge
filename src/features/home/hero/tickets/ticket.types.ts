@@ -3,7 +3,5 @@ export type TicketItem = {
   title: string;
   imageUrl: string | null;
   kind: string;
-  price: number;
-  currency: string;
-  tint?: string;
+  price?: number | null;
 };
