@@ -1,13 +1,10 @@
 import Image from "next/image";
 import type { TicketItem } from "./ticket.types";
 
-// Taille d'un ticket en pixels (le carrousel le réduit sur petits écrans)
 export const TICKET_W = 330;
 export const TICKET_H = 467;
-// Identifiant utilisé par le <clipPath> défini dans tickets-carousel.tsx
 export const TICKET_CLIP_ID = "ticket-clip";
 
-// 20000 -> "20K", 1500000 -> "1,5M"
 export function formatPrice(value: number) {
   const fmt = (n: number, unit: string) => `${Number(n.toFixed(1))}${unit}`.replace(".", ",");
   if (value >= 1_000_000) return fmt(value / 1_000_000, "M");
@@ -15,7 +12,6 @@ export function formatPrice(value: number) {
   return String(value);
 }
 
-// Dessin du code-barres : [position x, largeur] de chaque barre
 const BARCODE_W = 145;
 const BARCODE_H = 36;
 const BARCODE: ReadonlyArray<readonly [x: number, w: number]> = [
@@ -24,7 +20,6 @@ const BARCODE: ReadonlyArray<readonly [x: number, w: number]> = [
   [106.5, 4.5], [115.5, 4.5], [125.25, 3.75], [134.25, 3.75], [143.25, 1.5],
 ];
 
-// Petits mots affichés au milieu du ticket
 const BADGES = ["SPECTACLE", "LIVE", "AMBIANCE"];
 
 export function TicketShell({ children, className = "" }: { children?: React.ReactNode; className?: string }) {
@@ -46,9 +41,6 @@ export default function TicketCard({ ticket }: { ticket: TicketItem }) {
           <Image src={ticket.imageUrl} alt="" fill unoptimized sizes="330px" className="object-cover" />
         ) : (
           <div className="size-full bg-gradient-to-b from-[#1a2a6c] to-navy" />
-        )}
-        {ticket.tint && (
-          <div className="absolute inset-0 opacity-60" style={{ backgroundColor: ticket.tint, mixBlendMode: "color" }} />
         )}
         <div
           className="absolute inset-0"
@@ -98,10 +90,12 @@ export default function TicketCard({ ticket }: { ticket: TicketItem }) {
         ))}
       </svg>
 
-      <div className="absolute right-4 top-[364px] flex items-baseline gap-[6px] leading-none">
-        <span className="text-[51px] font-extrabold leading-none tracking-[-0.02em]">{formatPrice(ticket.price)}</span>
-        <span className="relative top-[1px] text-[16px] font-semibold">{ticket.currency}</span>
-      </div>
+      {ticket.price != null && (
+        <div className="absolute right-4 top-[364px] flex items-baseline gap-[6px] leading-none">
+          <span className="text-[51px] font-extrabold leading-none tracking-[-0.02em]">{formatPrice(ticket.price)}</span>
+          {/* <span className="relative top-[1px] text-[16px] font-semibold">MGA</span> */}
+        </div>
+      )}
     </TicketShell>
   );
 }

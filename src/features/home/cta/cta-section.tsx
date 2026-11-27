@@ -17,25 +17,24 @@ export default function CTASection() {
         </div>
       </figure>
 
-      <div className="relative max-sm:-mt-40">
-        <div className="relative w-full h-[403px] z-10">
+      <div className="relative">
+        <div className="relative z-10 w-full aspect-[1440/304] lg:aspect-auto lg:h-[403px]">
           <Image
             src={"/cta-people.png"}
             alt="cta people"
             fill
-            className="object-contain lg:object-cover"
+            className="object-cover"
           />
+          <div aria-hidden="true" className="absolute inset-x-0 bottom-0 z-10 h-[3px] bg-navy" />
         </div>
 
-        <div className="absolute -top-30 sm:-top-[40%] lg:-top-60 w-full z-1">
-          <div className="relative w-full h-[503px]">
-            <Image
-              src={"/cta-people-background.png"}
-              alt="cta people"
-              fill
-              className="object-cover"
-            />
-          </div>
+        <div className="absolute bottom-0 z-1 w-full aspect-[1440/1256] translate-y-[21%] lg:bottom-auto lg:-top-60 lg:aspect-auto lg:h-[503px] lg:translate-y-0">
+          <Image
+            src={"/cta-people-background.png"}
+            alt="cta people"
+            fill
+            className="object-cover"
+          />
         </div>
       </div>
     </section>
