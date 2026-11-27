@@ -7,33 +7,27 @@ import TicketCard, { TICKET_CLIP_ID, TICKET_H, TICKET_W, TicketShell } from "./t
 import { TICKET_CLIP_PATH } from "./ticket-shape";
 import { useTickets } from "./use-tickets";
 
-// ---------- Réglages du carrousel (en pixels) ----------
-const GAP = 28; // espace entre deux tickets
-const PITCH = TICKET_W + GAP; // distance entre les centres de deux tickets
-const ACTIVE_GAP = 52; // espace supplémentaire autour du ticket actif
-const VIEW_H = 420; // hauteur visible du carrousel
-const BASE_TOP = 139; // position verticale des tickets
-const REVEAL_MARGIN = 14; // marge quand on survole un ticket pour le montrer en entier
+const GAP = 28; 
+const PITCH = TICKET_W + GAP; 
+const ACTIVE_GAP = 52; 
+const VIEW_H = 420; 
+const BASE_TOP = 139; 
+const REVEAL_MARGIN = -22; 
 
-// Le ticket actif est agrandi, légèrement remonté et incliné
 const ACTIVE_SCALE = 1.18;
 const ACTIVE_Y = -64;
 const ACTIVE_ROTATE = 3;
 
-const SKELETON_COUNT = 9; // nombre de faux tickets pendant le chargement
+const SKELETON_COUNT = 9; 
 
-// Style commun aux deux flèches (cachées à partir de lg)
 const ARROW_CLASSES =
   "absolute top-[40%] z-30 flex size-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white/15 text-white backdrop-blur disabled:opacity-40 lg:hidden";
 
-// Position d'un ticket par rapport au ticket actif :
-// 0 = actif, -1 = juste à gauche, 1 = juste à droite, etc. (le carrousel tourne en boucle)
 function positionFromActive(index: number, active: number, total: number) {
   const half = Math.floor(total / 2);
   return ((((index - active + half) % total) + total) % total) - half;
 }
 
-// Montée verticale nécessaire pour afficher un ticket survolé en entier
 function revealY(scale: number) {
   return VIEW_H - REVEAL_MARGIN - BASE_TOP - TICKET_H / 2 - (TICKET_H * scale) / 2;
 }
@@ -42,7 +36,6 @@ export default function TicketsCarousel() {
   const { data: tickets, isPending } = useTickets();
   const reduceMotion = useReducedMotion();
 
-  // active = ticket au centre, prev = ancien ticket actif (sert à détecter la boucle)
   const [{ active, prev }, setState] = useState({ active: 2, prev: 2 });
   const [hovered, setHovered] = useState<number | null>(null);
 
@@ -56,7 +49,6 @@ export default function TicketsCarousel() {
 
   return (
     <div className="absolute inset-x-0 bottom-0 z-[1] overflow-x-clip" style={{ height: VIEW_H }}>
-      {/* Définit la forme découpée des tickets (invisible) */}
       <svg width="0" height="0" aria-hidden="true" className="absolute">
         <defs>
           <clipPath id={TICKET_CLIP_ID} clipPathUnits="objectBoundingBox">
@@ -65,7 +57,6 @@ export default function TicketsCarousel() {
         </defs>
       </svg>
 
-      {/* Les tickets sont réduits sur petit écran (scale-[0.65]) puis grandissent */}
       <ul
         className="relative size-full origin-bottom scale-[0.65] sm:scale-[0.85] lg:scale-100"
         aria-label="Événements à la une"
@@ -73,9 +64,9 @@ export default function TicketsCarousel() {
         {Array.from({ length: total }, (_, i) => {
           const rel = positionFromActive(i, active, total);
           const relPrev = positionFromActive(i, prev, total);
-          const wrapped = rel - relPrev !== prev - active; // le ticket fait le tour : pas d'animation
+          const wrapped = rel - relPrev !== prev - active; 
           const isActive = rel === 0;
-          const hidden = Math.abs(rel) === half; // le ticket le plus éloigné est caché
+          const hidden = Math.abs(rel) === half; 
           const revealed = !isPending && !hidden && hovered === i;
 
           const transition =
@@ -133,13 +124,11 @@ export default function TicketsCarousel() {
         })}
       </ul>
 
-      {/* Dégradé en bas pour fondre les tickets dans le fond */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-16 bg-gradient-to-t from-navy to-transparent"
       />
 
-      {/* Flèches précédent / suivant sur les côtés : utiles sur mobile (pas de survol), cachées sur grand écran */}
       <button
         type="button"
         aria-label="Ticket précédent"
