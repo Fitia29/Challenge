@@ -4,6 +4,7 @@ import "./globals.css";
 import AppQueryClientProvider from "@/providers/Providers";
 import Navbar from "@/components/layout/navbar";
 import TopBanner from "@/components/layout/top-banner";
+import Footer from "@/features/home/footer/footer";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <TopBanner />
           <Navbar />
           {children}
+          <Footer />
         </AppQueryClientProvider>
       </body>
     </html>

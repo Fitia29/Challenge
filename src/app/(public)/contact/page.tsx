@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/page-hero";
 import ContactSection from "@/features/contact/contact-section";
+import FaqSection from "@/features/home/faq/faq-section";
 
 export const metadata: Metadata = {
   title: "Actualités & Blog | Tikety",
@@ -16,6 +17,8 @@ export default function ContactPage() {
       />
 
       <ContactSection />
+
+      <FaqSection />
     </main>
   );
 }
